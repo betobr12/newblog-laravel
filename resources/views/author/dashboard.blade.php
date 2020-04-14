@@ -320,5 +320,5 @@
 @endsection
 
 @push('js')
-    
+
 @endpush

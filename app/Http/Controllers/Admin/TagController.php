@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Tag;
+use Illuminate\Support\Str;
+use Brian2694\Toastr\Facades\Toastr;
 
 class TagController extends Controller
 {
@@ -12,9 +15,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index()    {
+        $tags = Tag::latest()->get();
+        return view('admin.tag.index', compact('tags'));
     }
 
     /**
@@ -24,7 +27,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('admin.tag.create');
     }
 
     /**
@@ -35,7 +39,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required'
+        ]);
+        $tag = new Tag();
+        $tag->name = $request->name;
+        $tag->slug = Str::slug($request->name);
+        $tag->save();
+
+        Toastr::success('Tag inserida com sucesso :)' ,'Sucesso!');
+        return redirect()->route('admin.tag.index');
     }
 
     /**
