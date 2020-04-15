@@ -33,22 +33,27 @@
             <li class="header">MENU DE NAVEGAÇÃO</li>
 
             @if(Request::is('admin*'))
-            <li class="{{Request::is('admin/dashboard')? 'active' : ''}}">                
+            <li class="{{Request::is('admin/dashboard')? 'active' : ''}}">
                 <a href="{{route('admin.dashboard')}}">
                     <i class="material-icons">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-                
+
             </li>
-            <li class="{{Request::is('admin/tag*')? 'active' : ''}}">                
+            <li class="{{Request::is('admin/tag*')? 'active' : ''}}">
                 <a href="{{route('admin.tag.index')}}">
                     <i class="material-icons">label</i>
                     <span>Tag</span>
                 </a>
-                
             </li>
-            <li class="header">System</li>            
-            <li class="">                
+            <li class="{{Request::is('admin/category*')? 'active' : ''}}">
+                <a href="{{route('admin.category.index')}}">
+                    <i class="material-icons">apps</i>
+                    <span>Category</span>
+                </a>
+            </li>
+            <li class="header">System</li>
+            <li class="">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
@@ -64,15 +69,15 @@
             @endif
 
             @if(Request::is('author*'))
-            <li class="{{Request::is('author/dashboard')? 'active' : ''}}">                
+            <li class="{{Request::is('author/dashboard')? 'active' : ''}}">
                 <a href="{{route('author.dashboard')}}">
                     <i class="material-icons">dashboard</i>
                     <span>Dashboard</span>
                 </a>
-                
+
             </li>
-            <li class="header">System</li>            
-            <li class="">                
+            <li class="header">System</li>
+            <li class="">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
@@ -84,10 +89,10 @@
                  @csrf
              </form>
             </li>
-            
+
 
             @endif
-           
+
         </ul>
     </div>
     <!-- #Menu -->
@@ -95,7 +100,7 @@
     <div class="legal">
         <div class="copyright">
             &copy; {{date ( 'Y' )  }} - <a href="https://github.com/betobr12"> Betobr12</a>.
-          
+
         </div>
         <div class="version">
             <b>Version: </b> 0.0.2
