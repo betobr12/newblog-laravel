@@ -2,13 +2,13 @@
 
 
 @section('title')
-    
+
 @endsection
 
 @push('css')
 <link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
-    
+
 @endpush
 
 @section('content')
@@ -28,7 +28,7 @@
                 <div class="header">
                     <h2>
                         LISTA DE TAGS
-                    </h2>                   
+                    </h2>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
@@ -38,7 +38,8 @@
                                     <th>ID</th>
                                     <th>Nome</th>
                                     <th>Created at</th>
-                                    <th>Updated at</th>                   
+                                    <th>Updated at</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -46,16 +47,29 @@
                                     <th>ID</th>
                                     <th>Nome</th>
                                     <th>Created at</th>
-                                    <th>Updated at</th>    
+                                    <th>Updated at</th>
+                                    <th>Ações</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($tags as $key=>$tag)   
-                                 <tr>                             
+                                @foreach ($tags as $key=>$tag)
+                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $tag->name }}</td>
                                     <td>{{ $tag->created_at }}</td>
                                     <td>{{ $tag->updated_at }}</td>
+                                 <td class="text-center">
+                                    <a href="{{route('admin.tag.edit',$tag->id)}}" class="btn btn-info waves-effect">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <button class="btn btn-danger waves-effect" type="button" onclick="deleteTag({{ $tag->id }})">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                    <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy',$tag->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
                                  </tr>
                                 @endforeach
                            </tbody>
@@ -71,9 +85,9 @@
 
 @endsection
 
-@push('js') 
+@push('js')
 
-    
+
     <!-- Jquery DataTable Plugin Js -->
     <script src="{{ asset('assets/backend/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
@@ -86,7 +100,41 @@
     <script src="{{ asset('assets/backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
 
     <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>
-    <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+    <script src="{{ asset('assets/backend/js/sweetalert2.all.js') }}"></script>
+
+    <script type="text/javascript">
+
+        function deleteTag(id) {
+            swal({
+                title: 'Deseja realmente excluir?',
+                text: "Escolha uma das opções abaixo:",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, desejo excluir!',
+                cancelButtonText: 'Não, cancele!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById('delete-form-'+id).submit();
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swal(
+                        'Cancelado',
+                        'Suas informações não foram excluidas :)',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
 
     @endpush
 
