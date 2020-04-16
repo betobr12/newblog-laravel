@@ -33,10 +33,6 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role');
     }
-
-
-
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -45,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts(){
+
+        return $this->hasMany('App\Post');
+    }
 }

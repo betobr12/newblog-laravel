@@ -28,6 +28,7 @@
                 <div class="header">
                     <h2>
                         LISTA DE CATEGORIAS
+                        <span class="badge badge-info">{{ $categories->count() }}</span>
                     </h2>
                 </div>
                 <div class="body">
@@ -37,6 +38,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Numero de Posts</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Ações</th>
@@ -46,6 +48,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Numero de Posts</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Ações</th>
@@ -56,6 +59,7 @@
                                  <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $category->name }}</td>
+                                    <td><span class="badge badge-info">{{ $category->posts->count() }}</span></td>
                                     <td>{{ $category->created_at }}</td>
                                     <td>{{ $category->updated_at }}</td>
                                  <td class="text-center">
