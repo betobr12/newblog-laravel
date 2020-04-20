@@ -12,7 +12,7 @@
 <div class="container-fluid">
     <div class="block-header">
         <h2>
-        <a class="btn btn-primary waves-effect" href="{{route('admin.post.create')}}">
+        <a class="btn btn-primary waves-effect" href="{{route('author.post.create')}}">
             <i class="material-icons">add</i>
             <span>Adicionar Post</span></a>
         </h2>
@@ -81,16 +81,16 @@
                                     <td>{{ $post->created_at }}</td>
                                     {{-- <td>$post->updated_at --}}</td>
                                  <td class="text-center">
-                                    <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-info waves-effect">
+                                    <a href="{{route('author.post.show',$post->id)}}" class="btn btn-info waves-effect">
                                         <i class="material-icons">visibility</i>
                                     </a>
-                                    <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-info waves-effect">
+                                    <a href="{{route('author.post.edit',$post->id)}}" class="btn btn-info waves-effect">
                                         <i class="material-icons">edit</i>
                                     </a>
                                     <button class="btn btn-danger waves-effect" type="button" onclick="deletePost({{ $post->id }})">
                                         <i class="material-icons">delete</i>
                                     </button>
-                                    <form id="delete-form-{{ $post->id }}" action="{{ route('admin.post.destroy',$post->id) }}" method="POST" style="display: none;">
+                                    <form id="delete-form-{{ $post->id }}" action="{{ route('author.post.destroy',$post->id) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -159,7 +159,6 @@
                 }
             })
         }
-
     </script>
 
     @endpush

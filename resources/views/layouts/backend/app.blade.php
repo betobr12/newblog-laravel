@@ -36,6 +36,8 @@
 
      <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
+    <!-- arrumar depois <link href="{{asset('assets/backend/css/toastr.min.css')}}" rel="stylesheet" /> -->
+
     @stack('css')
 
 </head>
@@ -107,6 +109,7 @@
     <script src="{{asset('assets/backend/js/demo.js')}}"></script>
 
     <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {{--<script src="{{asset('assets/backend/js/toastr.min.js')}}"></script>--}}
     {!! Toastr::message() !!}
 
 

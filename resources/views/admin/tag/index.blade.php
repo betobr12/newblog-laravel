@@ -1,13 +1,10 @@
 @extends('layouts.backend.app')
 
-
-@section('title')
-
-@endsection
+@section('title','Tag')
 
 @push('css')
-<link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
+<link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
 @endpush
 

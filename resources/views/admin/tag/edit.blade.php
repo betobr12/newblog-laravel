@@ -1,8 +1,6 @@
 @extends('layouts.backend.app')
 
-@section('title')
-
-@endsection
+@section('title','Tag')
 
 @push('css')
 
@@ -12,7 +10,7 @@
 
 <div class="container-fluid">
     <div class="block-header">
-        <h2>FORM EXAMPLES</h2>
+        <h2>EDITAR TAG</h2>
     </div>
 
 

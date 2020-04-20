@@ -10,7 +10,7 @@
 @section('content')
     <div class="container-fluid">
         <!-- Vertical Layout | With Floating Label -->
-        <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('author.post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row clearfix">
                 <div class="col-lg-7 col-md-10 col-sm-10 col-xs-10">
@@ -52,7 +52,7 @@
                             <div class="form-group form-float">
                                 <div class="form-line {{ $errors->has('categories') ? 'focused error' : '' }}" >
                                     <label for="category">Selecione a Categoria</label>
-                                    <select name="categories[]" id="category" class="form-control show-tick" data-live-search="true" data-size="3" multiple>
+                                    <select name="categories[]" id="category" class="form-control show-tick" data-live-search="true" data-size="10" multiple>
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
@@ -62,7 +62,7 @@
                             <div class="form-group form-float">
                                 <div class="form-line {{ $errors->has('tags') ? 'focused error' : '' }}">
                                     <label for="tag">Selecione a Tag</label>
-                                    <select name="tags[]" id="tag" class="form-control show-tick" data-live-search="true" data-size="5" multiple>
+                                    <select name="tags[]" id="tag" class="form-control show-tick" data-live-search="true" data-size="10" multiple>
                                         @foreach($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                         @endforeach
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
 
-                            <a  class="btn btn-danger m-t-15 waves-effect" href="{{ route('admin.post.index') }}">VOLTAR</a>
+                            <a  class="btn btn-danger m-t-15 waves-effect" href="{{ route('author.post.index') }}">VOLTAR</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">ENVIAR</button>
 
                         </div>

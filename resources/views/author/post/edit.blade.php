@@ -10,8 +10,9 @@
 @section('content')
     <div class="container-fluid">
         <!-- Vertical Layout | With Floating Label -->
-        <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('author.post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="row clearfix">
                 <div class="col-lg-7 col-md-10 col-sm-10 col-xs-10">
                     <div class="card">
@@ -23,7 +24,7 @@
                         <div class="body">
                                 <div class="form-group form-float">
                                     <div class="form-line">
-                                        <input type="text" id="title" class="form-control" name="title">
+                                        <input type="text" id="title" class="form-control" name="title" value="{{ $post->title }}">
                                         <label class="form-label">Titulo do Post</label>
                                     </div>
                                 </div>
@@ -34,7 +35,8 @@
                                 </div>
 
                             <div class="form-group">
-                                <input type="checkbox" id="publish" class="filled-in" name="status" value="1">
+                                <input type="checkbox" id="publish" class="filled-in" name="status"
+                                value="1" {{ $post->status == true ? 'checked' : '' }}>
                                 <label for="publish">Publicar</label>
                             </div>
 
@@ -52,9 +54,13 @@
                             <div class="form-group form-float">
                                 <div class="form-line {{ $errors->has('categories') ? 'focused error' : '' }}" >
                                     <label for="category">Selecione a Categoria</label>
-                                    <select name="categories[]" id="category" class="form-control show-tick" data-live-search="true" data-size="3" multiple>
+                                    <select name="categories[]" id="category" class="form-control show-tick" data-live-search="true" data-size="10" multiple>
                                         @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option
+                                                @foreach($post->categories as $postCategory)
+                                                    {{ $postCategory->id == $category->id ? 'selected' : '' }}
+                                                @endforeach
+                                                value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -62,15 +68,19 @@
                             <div class="form-group form-float">
                                 <div class="form-line {{ $errors->has('tags') ? 'focused error' : '' }}">
                                     <label for="tag">Selecione a Tag</label>
-                                    <select name="tags[]" id="tag" class="form-control show-tick" data-live-search="true" data-size="5" multiple>
+                                    <select name="tags[]" id="tag" class="form-control show-tick" data-live-search="true" data-size="10" multiple>
                                         @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                            <option
+                                                    @foreach($post->tags as $postTag)
+                                                        {{ $postTag->id == $tag->id ? 'selected' :'' }}
+                                                    @endforeach
+                                                    value="{{ $tag->id }}">{{ $tag->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <a  class="btn btn-danger m-t-15 waves-effect" href="{{ route('admin.post.index') }}">VOLTAR</a>
+                            <a  class="btn btn-danger m-t-15 waves-effect" href="{{ route('author.post.index') }}">VOLTAR</a>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">ENVIAR</button>
 
                         </div>
@@ -86,7 +96,7 @@
                             </h2>
                         </div>
                         <div class="body">
-                            <textarea id="tinymce" name="body"></textarea>
+                            <textarea id="tinymce" name="body" >{{ $post->body }}</textarea>
                         </div>
                     </div>
                 </div>
