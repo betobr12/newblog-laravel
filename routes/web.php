@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::post('subscriber','SubscriberController@store')->name('subscriber.store');
+
 Auth::routes();
 
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin']], function
@@ -32,6 +34,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::get('/pending/post','PostController@pending')->name('post.pending');
     Route::put('/post/{id}/approve','PostController@approval')->name('post.approve');
+
+    Route::get('/subscriber','SubscriberController@index')->name('subscriber.index');
+    Route::delete('/subscriber/{subscriber}','SubscriberController@destroy')->name('subscriber.destroy');
 
 });
 

@@ -64,6 +64,13 @@
                     <span>Posts Pendentes</span>
                 </a>
             </li>
+            <li class="{{Request::is('admin/subscriber')? 'active' : ''}}">
+                <a href="{{route('admin.subscriber.index')}}">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Inscritos Pendentes</span>
+                </a>
+            </li>
+
             <li class="header">System</li>
             <li class="">
                 <a class="dropdown-item" href="{{ route('logout') }}"

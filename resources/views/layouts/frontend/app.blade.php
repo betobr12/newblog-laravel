@@ -22,20 +22,22 @@
 
 	<link href="{{asset('assets/frontend/css/swiper.css')}}" rel="stylesheet">
 
-	<link href="{{asset('assets/frontend/css/ionicons.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/frontend/css/ionicons.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 
-    
+
     @stack('css')
-  
+
 </head>
 <body>
-    
+
     @include('layouts.frontend.partial.header')
 
     @yield('content')
 
-    @include('layouts.frontend.partial.footer')    
+    @include('layouts.frontend.partial.footer')
 
     	<!-- SCIPTS -->
 
@@ -43,12 +45,23 @@
 
 	<script src="{{asset('assets/frontend/js/tether.min.js')}}"></script>
 
-	<script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>	
+	<script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>
 
 	<script src="{{asset('assets/frontend/js/scripts.js')}}"></script>
 
 	<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-	{!! Toastr::message() !!}
+    {!! Toastr::message() !!}
+
+    <script>
+        @if($errors->any())
+          @foreach($errors->all() as $error)
+              toastr.error('{{$error}}','Error',{
+                  closeButton: true,
+                  progressBar: true,
+          });
+          @endforeach
+        @endif
+      </script>
 
 	@stack('js')
 
