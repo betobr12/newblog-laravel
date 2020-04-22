@@ -101,7 +101,6 @@ class PostController extends Controller
             Notification::route('mail',$subscriber->email)
                 ->notify(new NewPostNotify($post));
         }
-
         Toastr::success('Post Salvo com sucesso :)','Successo');
         return redirect()->route('admin.post.index');
     }
@@ -205,6 +204,13 @@ class PostController extends Controller
             $post->is_approved = true;
             $post->save();
             $post->user->notify(new AuthorPostApproved($post));
+
+            $subscribers = Subscriber::all();
+            foreach ($subscribers as $subscriber)
+            {
+                Notification::route('mail',$subscriber->email)
+                    ->notify(new NewPostNotify($post));
+            }
 
             Toastr::success('Post Aprovado :)','Successo');
         } else {
