@@ -67,6 +67,12 @@
                     <span>Posts Pendentes</span>
                 </a>
             </li>
+            <li class="{{Request::is('admin/favorite')? 'active' : ''}}">
+                <a href="{{route('admin.favorite.index')}}">
+                    <i class="material-icons">favorite</i>
+                    <span>Posts Favoritos</span>
+                </a>
+            </li>
             <li class="{{Request::is('admin/subscriber')? 'active' : ''}}">
                 <a href="{{route('admin.subscriber.index')}}">
                     <i class="material-icons">subscriptions</i>
@@ -110,6 +116,12 @@
                     <span>Post</span>
                 </a>
             </li>
+            <li class="{{Request::is('author/favorite')? 'active' : ''}}">
+                <a href="{{route('author.favorite.index')}}">
+                    <i class="material-icons">favorite</i>
+                    <span>Posts Favoritos</span>
+                </a>
+            </li>
             <li class="header">System</li>
             <li class="{{Request::is('author/settings')? 'active' : ''}}">
                 <a href="{{route('author.settings')}}">
@@ -122,7 +134,7 @@
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();">
                 <i class="material-icons">input</i>
-                <span>Logout</span>
+                <span>Sair</span>
              </a>
 
              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

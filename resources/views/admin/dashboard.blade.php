@@ -1,11 +1,10 @@
 @extends('layouts.backend.app')
 
+@section('title','Dashboard')
 
 @push('css')
-    
-@endpush
-    
 
+@endpush
 
 @section('content')
 <div class="container-fluid">
@@ -343,5 +342,5 @@
 <script src="{{asset('assets/backend/plugins/jquery-sparkline/jquery.sparkline.js')}}"></script>
 
 <script src="{{asset('assets/backend/js/pages/index.js')}}"></script>
-    
+
 @endpush
