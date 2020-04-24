@@ -67,13 +67,19 @@
                     <span>Posts Pendentes</span>
                 </a>
             </li>
-            <li class="{{Request::is('admin/favorite')? 'active' : ''}}">
+            <li class="{{Request::is('admin/favorite*')? 'active' : ''}}">
                 <a href="{{route('admin.favorite.index')}}">
                     <i class="material-icons">favorite</i>
                     <span>Posts Favoritos</span>
                 </a>
             </li>
-            <li class="{{Request::is('admin/subscriber')? 'active' : ''}}">
+            <li class="{{Request::is('admin/comment*')? 'active' : ''}}">
+                <a href="{{route('admin.comment.index')}}">
+                    <i class="material-icons">comment</i>
+                    <span>Comentarios</span>
+                </a>
+            </li>
+            <li class="{{Request::is('admin/subscriber*')? 'active' : ''}}">
                 <a href="{{route('admin.subscriber.index')}}">
                     <i class="material-icons">subscriptions</i>
                     <span>Inscritos Pendentes</span>
@@ -81,7 +87,7 @@
             </li>
 
             <li class="header">System</li>
-            <li class="{{Request::is('admin/settings')? 'active' : ''}}">
+            <li class="{{Request::is('admin/settings*')? 'active' : ''}}">
                 <a href="{{route('admin.settings')}}">
                     <i class="material-icons">settings</i>
                     <span>configurações</span>
@@ -116,14 +122,20 @@
                     <span>Post</span>
                 </a>
             </li>
-            <li class="{{Request::is('author/favorite')? 'active' : ''}}">
+            <li class="{{Request::is('author/favorite*')? 'active' : ''}}">
                 <a href="{{route('author.favorite.index')}}">
                     <i class="material-icons">favorite</i>
                     <span>Posts Favoritos</span>
                 </a>
             </li>
+            <li class="{{Request::is('author/comment*')? 'active' : ''}}">
+                <a href="{{route('author.comment.index')}}">
+                    <i class="material-icons">comment</i>
+                    <span>Comentarios</span>
+                </a>
+            </li>
             <li class="header">System</li>
-            <li class="{{Request::is('author/settings')? 'active' : ''}}">
+            <li class="{{Request::is('author/settings*')? 'active' : ''}}">
                 <a href="{{route('author.settings')}}">
                     <i class="material-icons">settings</i>
                     <span>configurações</span>
