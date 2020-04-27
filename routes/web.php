@@ -17,12 +17,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::get('post/{slug}', 'PostController@details')->name('post.details');
-
 Route::get('posts', 'PostController@index')->name('post.index');
-
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('profile/{username}','AuthorController@profile')->name('author.profile');
+
 Route::post('subscriber','SubscriberController@store')->name('subscriber.store');
+
+Route::get('/category/{slug}','PostController@postByCategory')->name('category.posts');
+Route::get('/tag/{slug}','PostController@postByTag')->name('tag.posts');
+
+Route::get('/search','SearchController@search')->name('search');
 
 Auth::routes();
 
@@ -52,6 +57,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::get('/favorite','FavoriteController@index')->name('favorite.index');
 
+    Route::get('/authors','AuthorController@index')->name('author.index');
+    Route::delete('/authors/{id}','AuthorController@destroy')->name('author.destroy');
+
     Route::get('comments','CommentController@index')->name('comment.index');
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
 
@@ -74,4 +82,10 @@ Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middlewa
 
     Route::get('comments','CommentController@index')->name('comment.index');
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
+});
+
+View::composer('layouts.frontend.partial.footer', function ($view) {
+    $categories = App\Category::all();
+    $view->with('categories',$categories);
+
 });

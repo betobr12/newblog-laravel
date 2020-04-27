@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 
-@section('title','Posts')
+@section('title','Category')
 
 
 
@@ -10,9 +10,15 @@
 
 <link href="{{ asset('assets/frontend/css/category/responsive.css') }}" rel="stylesheet">
 <style>
-        .favorite_posts{
-            color: blue;
-        }
+    .slider {
+        height: 400px;
+        width: 100%;
+        background-image: url({{ Storage::disk('public')->url('category/'.$category->image) }});
+        background-size: cover;
+    }
+    .favorite_posts{
+        color: blue;
+    }
 </style>
 
 
@@ -21,17 +27,17 @@
 @section('content')
 
 <div class="slider display-table center-text">
-    <h1 class="title display-table-cell"><b>TODOS OS POSTS</b></h1>
+    <h1 class="title display-table-cell"><b>{{ $category->name }}</b></h1>
 </div><!-- slider -->
 
 <section class="blog-area section">
     <div class="container">
 
         <div class="row">
+            @if($posts->count() > 0)
+                @foreach ($posts as $post)
 
-            @foreach ($posts as $post)
-
-            <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="single-post post-style-1">
 
@@ -71,11 +77,30 @@
                 </div><!-- card -->
             </div><!-- col-lg-4 col-md-6 -->
 
-            @endforeach
+                @endforeach
+            @else
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <div class="single-post post-style-1">
+                        <div class="blog-info">
+
+                            <h4 class="title">
+                                <strong>Desculpe, Post não encontrado...</strong>
+                            </h4>
+
+
+                        </div><!-- blog-info -->
+                    </div><!-- single-post -->
+                </div><!-- card -->
+            </div><!-- col-lg-4 col-md-6 -->
+
+
+            @endif
 
         </div><!-- row -->
 
-        {{ $posts->links() }}
+        {{-- $posts->links() --}}
 
     </div><!-- container -->
 </section><!-- section -->

@@ -44,11 +44,11 @@
                         <div class="post-info">
 
                             <div class="left-area">
-                                <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/').$post->user->image }}" alt="Profile Image"></a>
+                                <a class="avatar" href="{{ route('author.profile', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/').$post->user->image }}" alt="Profile Image"></a>
                             </div>
 
                             <div class="middle-area">
-                                <a class="name" href="#"><b>{{ $post->user->name }}</b></a>
+                                <a class="name" href="{{ route('author.profile', $post->user->username) }}"><b>{{ $post->user->name }}</b></a>
                                 <h6 class="date">on {{ $post->created_at->diffForHumans() }}</h6>
                             </div>
 
@@ -65,7 +65,7 @@
 
                                 @foreach ($post->categories as $category)
 
-                                <li><a href="#">{{ $category->name }}</a></li>
+                                <li><a href="{{ route('category.posts',$category->slug) }}">{{ $category->name }}</a></li>
 
                                 @endforeach
 
@@ -126,7 +126,7 @@
 
                             @foreach ($post->tags as $tag)
 
-                            <li><a href="#">{{ $tag->name }}</a></li>
+                            <li><a href="{{ route('tag.posts',$tag->slug) }}">{{ $tag->name }}</a></li>
 
                             @endforeach
 

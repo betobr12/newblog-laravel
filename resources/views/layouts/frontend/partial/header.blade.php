@@ -25,9 +25,9 @@
         </ul><!-- main-menu -->
 
         <div class="src-area">
-            <form>
-                <button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
-                <input class="src-input" type="text" placeholder="Type of search">
+            <form method="GET" action="{{ route('search') }}">
+                <button class="src-btn" value="{{ isset($query) ? $query : '' }}" type="submit"><i class="ion-ios-search-strong"></i></button>
+                <input class="src-input" name="query" type="text" placeholder="Pequisar..">
             </form>
         </div>
 
