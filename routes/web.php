@@ -84,7 +84,7 @@ Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middlewa
     Route::delete('comments/{id}','CommentController@destroy')->name('comment.destroy');
 });
 
-View::composer('layouts.frontend.partial.footer', function ($view) {
+    View::composer('layouts.frontend.partial.footer', function ($view) {
     $categories = App\Category::all();
     $view->with('categories',$categories);
 

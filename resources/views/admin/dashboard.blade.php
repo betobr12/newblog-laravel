@@ -9,7 +9,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>DASHBOARD</h2>
+        <h2>PAINEL DE CONTROLE</h2>
     </div>
 
     <!-- Widgets -->
