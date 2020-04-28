@@ -26,16 +26,17 @@
 
 @section('content')
 
-<div class="header-bg">
+<div class="header-bg ">
 
 </div><!-- slider -->
 
 <section class="post-area section">
+
     <div class="container">
 
         <div class="row">
 
-            <div class="col-lg-8 col-md-12 no-right-padding">
+            <div class="col-lg-16 col-md-12 no-right-padding">
 
                 <div class="main-post">
 
@@ -99,24 +100,44 @@
                         </ul>
 
                         <ul class="icons">
-                            <li>SHARE : </li>
-                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                            <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+                            <li>COMPARTILHE : </li>
+
+                            <li><i><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-lang="pt" data-show-count="false"></a></i></li>
+
                         </ul>
+                    </div>
+
+                    <div class="post-info">
+
+                        <div class="left-area">
+                            <a class="avatar" href="{{ route('author.profile', $post->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/').$post->user->image }}" alt="Profile Image"></a>
+                        </div>
+
+                        <div class="middle-area">
+                            <a class="name" href="{{ route('author.profile', $post->user->username) }}"><b>{{ $post->user->name }}</b></a>
+                            <h6 class="date">on {{ $post->created_at->diffForHumans() }}</h6>
+                        </div>
+
                     </div>
 
 
                 </div><!-- main-post -->
             </div><!-- col-lg-8 col-md-12 -->
 
-            <div class="col-lg-4 col-md-12 no-left-padding">
+
+
+            <div class="col-lg-16 col-md-12 no-left-padding">
 
                 <div class="single-post info-area">
 
                     <div class="sidebar-area about-area">
+
+                        <br>
+
                         <h4 class="title"><b>Sobre o Autor</b></h4>
                         <p>{{ $post->user->about }}</p>
+
+
                     </div>
 
                     <div class="tag-area">
@@ -202,7 +223,7 @@
         <h4><b>COMENTARIOS</b></h4>
         <div class="row">
 
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-16 col-md-12">
                 <div class="comment-form">
                    @guest
                     <p>
@@ -219,7 +240,7 @@
                                     placeholder="Escreva seu comentario" aria-required="true" aria-invalid="false"></textarea >
                             </div><!-- col-sm-12 -->
                             <div class="col-sm-12">
-                                <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
+                                <button class="submit-btn" type="submit" id="form-submit"><b>ENVIAR COMENTARIO</b></button>
                             </div><!-- col-sm-12 -->
 
                         </div><!-- row -->
@@ -240,7 +261,7 @@
                         <div class="post-info">
 
                             <div class="left-area">
-                                <a class="avatar" href="#"><img src="{{ Storage::disk('public')->url('profile/'.$comment->user->image) }}" alt="Profile Image"></a>
+                                <a class="avatar" href="{{ route('author.profile', $comment->user->username) }}"><img src="{{ Storage::disk('public')->url('profile/'.$comment->user->image) }}" alt="Profile Image"></a>
                             </div>
 
                             <div class="middle-area">
@@ -249,10 +270,12 @@
                             </div>
 
                             <div class="right-area">
-                                <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
+                                <h5 class="reply-btn" ><a href="#"><b>RESPONDER</b></a></h5>
+
                             </div>
 
                         </div><!-- post-info -->
+                        <br>
 
                         <p>{{ $comment->comment }}</p>
 
@@ -278,6 +301,8 @@
 </section>
 
 @push('js')
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 @endpush
 

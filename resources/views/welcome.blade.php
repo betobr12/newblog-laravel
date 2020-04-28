@@ -103,7 +103,7 @@
 
         </div><!-- row -->
 
-        <a class="load-more-btn" href="#"><b>MOSTRAR MAIS</b></a>
+        <a class="load-more-btn" href="{{ route('post.index') }}"><b>MOSTRAR MAIS</b></a>
 
     </div><!-- container -->
 </section><!-- section -->

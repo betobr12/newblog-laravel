@@ -11,6 +11,9 @@
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
                     <li>
+                        <a href="{{ route('home') }}"><i class="material-icons">library_books</i>Ir para blog</a>
+                    </li>
+                    <li>
                         <a href="{{ Auth::user()->role->id == 1 ? route('admin.settings') : route('author.settings') }}"><i class="material-icons">person</i>Configurações</a>
                     </li>
 
@@ -82,7 +85,7 @@
             <li class="{{Request::is('admin/subscriber*')? 'active' : ''}}">
                 <a href="{{route('admin.subscriber.index')}}">
                     <i class="material-icons">subscriptions</i>
-                    <span>Inscritos Pendentes</span>
+                    <span>Lista de Inscritos</span>
                 </a>
             </li>
             <li class="{{Request::is('admin/authors*')? 'active' : ''}}">

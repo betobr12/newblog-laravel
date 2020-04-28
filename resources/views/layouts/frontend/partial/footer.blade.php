@@ -8,13 +8,11 @@
 
                    {{-- <aclass="logo"href="#"><imgsrc="images/logo.png"alt="LogoImage"></a> --}}
                     <p class="copyright">{{ config('app.name') }} @ 2020. Todos os direitos reservados.</p>
-                    <p class="copyright">Designed por <a href="https://colorlib.com" target="_blank">Colorlib</a> e desenvolvido por <a href="https://github.com/betobr12">Roberto</a></p>
+                    <p class="copyright">Desenvolvido por <a href="https://github.com/betobr12">Roberto</a></p>
                     <ul class="icons">
                         <li><a href="#"><i class="ion-social-facebook-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-twitter-outline"></i></a></li>
                         <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-vimeo-outline"></i></a></li>
-                        <li><a href="#"><i class="ion-social-pinterest-outline"></i></a></li>
                     </ul>
 
                 </div><!-- footer-section -->
