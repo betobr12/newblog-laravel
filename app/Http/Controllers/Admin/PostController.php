@@ -20,22 +20,13 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $posts = Post::latest()->get();
         return view('admin.post.index',compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categories = Category::all();
@@ -43,12 +34,6 @@ class PostController extends Controller
         return view('admin.post.create',compact('categories','tags'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -62,7 +47,6 @@ class PostController extends Controller
         $slug = Str::slug($request->title);
         if(isset($image))
         {
-//            Cria um nome unico para imagem
             $currentDate = Carbon::now()->toDateString();
             $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
@@ -105,23 +89,11 @@ class PostController extends Controller
         return redirect()->route('admin.post.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         return view('admin.post.show',compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         $categories = Category::all();
@@ -129,13 +101,6 @@ class PostController extends Controller
         return view('admin.post.edit',compact('post','categories','tags'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         $this->validate($request,[
@@ -149,7 +114,7 @@ class PostController extends Controller
         $slug = Str::slug($request->title);
         if(isset($image))
         {
-//            Cria um nome unico para imagem
+
             $currentDate = Carbon::now()->toDateString();
             $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
@@ -157,7 +122,7 @@ class PostController extends Controller
             {
                 Storage::disk('public')->makeDirectory('post');
             }
-//            Exclui a imagem antiga do repositorio
+
             if(Storage::disk('public')->exists('post/'.$post->image))
             {
                 Storage::disk('public')->delete('post/'.$post->image);
@@ -219,12 +184,6 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Post $post)
     {
         if (Storage::disk('public')->exists('post/'.$post->image))
