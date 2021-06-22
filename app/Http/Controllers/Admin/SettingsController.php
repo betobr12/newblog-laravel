@@ -40,7 +40,7 @@ class SettingsController extends Controller
             {
              Storage::disk('public')->makeDirectory('profile');
             }
-//            Delete old image form profile folder
+
             if (Storage::disk('public')->exists('profile/'.$user->image))
             {
                 Storage::disk('public')->delete('profile/'.$user->image);
