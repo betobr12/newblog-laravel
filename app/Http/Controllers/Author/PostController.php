@@ -19,35 +19,20 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $posts = Auth::user()->posts()->latest()->get();
         return view('author.post.index',compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $categories = Category::all();
         $tags = Tag::all();
         return view('author.post.create',compact('categories','tags'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -61,7 +46,6 @@ class PostController extends Controller
         $slug = Str::slug($request->title);
         if(isset($image))
         {
-//            Cria um nome unico para imagem
             $currentDate = Carbon::now()->toDateString();
             $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
@@ -100,12 +84,6 @@ class PostController extends Controller
         return redirect()->route('author.post.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         if ($post->user_id != Auth::id())
@@ -116,12 +94,6 @@ class PostController extends Controller
         return view('author.post.show',compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
         if ($post->user_id != Auth::id())
@@ -134,13 +106,6 @@ class PostController extends Controller
         return view('author.post.edit',compact('post','categories','tags'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Post $post)
     {
         if ($post->user_id != Auth::id())
@@ -159,7 +124,6 @@ class PostController extends Controller
         $slug = Str::slug($request->title);
         if(isset($image))
         {
-//            Cria um nome unico para imagem
             $currentDate = Carbon::now()->toDateString();
             $imageName  = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
@@ -167,7 +131,7 @@ class PostController extends Controller
             {
                 Storage::disk('public')->makeDirectory('post');
             }
-//            Exclui a imagem antiga do repositorio
+
             if(Storage::disk('public')->exists('post/'.$post->image))
             {
                 Storage::disk('public')->delete('post/'.$post->image);
@@ -199,13 +163,7 @@ class PostController extends Controller
         Toastr::success('Post Alterado com sucesso :)','Successo');
         return redirect()->route('author.post.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Post $post)
     {
         if ($post->user_id != Auth::id())
