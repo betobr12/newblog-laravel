@@ -16,14 +16,13 @@ class AuthorController extends Controller
             ->withCount('comments')
             ->withCount('favorite_posts')
             ->get();
-
             return view('admin.authors',compact('authors'));
     }
 
     public function destroy($id)
     {
         $author = User::findOrFail($id)->delete();
-
+        
         Toastr::success('Autor excluido com sucesso :)','Successo');
         return redirect()->back();
 
